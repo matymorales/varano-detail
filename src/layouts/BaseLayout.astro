@@ -1,0 +1,56 @@
+---
+import "../styles/global.css";
+import { findLogo } from "../utils/logo";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const logoUrl = findLogo();
+
+const {
+  title = "VARANO DETAIL — Estética vehicular",
+  description =
+    "Estética vehicular profesional. Lavados premium, abrillantados, interior full, tapizados, limpieza de motor y restauración de ópticas.",
+} = Astro.props;
+
+const favicon = logoUrl ?? "data:image/svg+xml," + encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#0b0b0d"/><text x="16" y="22" font-family="Arial Black,Arial" font-size="17" font-weight="900" fill="#ff6a00" text-anchor="middle">V</text></svg>`
+);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#08080a" />
+    <link rel="icon" type="image/svg+xml" href={favicon} />
+    <title>{title}</title>
+    <noscript>
+      <style>
+        [data-reveal] { opacity: 1 !important; transform: none !important; }
+        [data-menu] { display: none !important; }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <!--
+      VARANO DETAIL · DIRECTION CONTRACT
+      THESIS: sober auto-detail studio, not a racetrack — quiet authority replaces racing noise.
+      OWN-WORLD: black carbon surfaces, thin orange hairlines, Inter-extrabold uppercase, rounded keyline frames, one solid orange word per headline.
+      STORY: the visitor understands a studio that works slow and exact, and acts on WhatsApp.
+      FIRST VIEWPORT: full-bleed dark auto photo, left-aligned three-line Inter headline whose last word is solid orange, quiet stats row above the fold.
+      FORM: quiet refinement of the incumbent single-page landing; direction pinned by brief.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
+    <slot />
+
+    <script>
+      import "../scripts/main.ts";
+    </script>
+  </body>
+</html>

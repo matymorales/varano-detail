@@ -1,0 +1,62 @@
+---
+import BrandLogo from "./ui/BrandLogo.astro";
+import Icon from "./ui/Icon.astro";
+import { contact, paymentMethods, whatsapp } from "../data/site";
+---
+
+<footer class="border-t border-white/10 bg-carbon-900">
+  <div class="wrap grid gap-10 py-14 md:grid-cols-[1.4fr_1fr] md:items-center">
+    <div>
+      <BrandLogo />
+      <p class="mt-5 max-w-xs text-sm leading-relaxed text-white/50">
+        Estética vehicular que marca la diferencia. Trabajo a mano, productos de alta
+        gama y una obsesión por el detalle.
+      </p>
+      <a
+        href={whatsapp.link + encodeURIComponent(whatsapp.text)}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-racing-orange transition-colors hover:text-racing-orange-light"
+      >
+        <Icon name="whatsapp" className="h-4 w-4" />
+        {contact.phoneDisplay}
+      </a>
+    </div>
+
+    <div class="flex flex-col items-start gap-5 md:items-end">
+      <div class="flex flex-wrap gap-2">
+        {paymentMethods.map((m) => (
+          <span class="chip">
+            {m.icon === "cash" ? (
+              <Icon name="cash" className="h-4 w-4 text-racing-orange" />
+            ) : (
+              <Icon name="mp" className="h-4 w-4 text-racing-orange" />
+            )}
+            {m.name}
+          </span>
+        ))}
+      </div>
+
+      <a
+        href={contact.instagram.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-white"
+      >
+        <Icon name="instagram" className="h-4 w-4" />
+        {contact.instagram.handle}
+      </a>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="wrap flex flex-col items-center justify-between gap-3 py-6 sm:flex-row">
+      <p class="text-xs text-white/35">
+        © {new Date().getFullYear()} VARANO DETAIL — Estética vehicular. Todos los derechos reservados.
+      </p>
+      <p class="text-xs text-white/35">
+        Hecho con <span class="text-racing-orange">pasión</span> y muchos autos impecables.
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+@import "@fontsource-variable/inter/index.css";
+
+@theme {
+  --font-sans: "InterVariable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "InterVariable", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-carbon-950: #08080a;
+  --color-carbon-900: #0d0d0f;
+  --color-carbon-850: #121215;
+  --color-carbon-800: #17171b;
+  --color-carbon-700: #1f1f25;
+  --color-carbon-600: #292930;
+
+  --color-racing-orange: #ff6a00;
+  --color-racing-orange-light: #ff8a33;
+  --color-racing-orange-dark: #c04e00;
+
+  --animate-marquee: marquee 42s linear infinite;
+
+  --ease-racing: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-carbon-950 text-white/90 font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-racing-orange);
+    color: #000;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-carbon-950);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-carbon-600);
+    border: 2px solid var(--color-carbon-950);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-racing-orange);
+  }
+
+  img {
+    user-select: none;
+  }
+}
+
+@layer components {
+  /* Container */
+  .wrap {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  /* Kicker label */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.36em] text-white/55;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply block h-px w-7 bg-racing-orange;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2.5 rounded-md bg-racing-orange px-7 py-3.5 text-sm font-extrabold uppercase tracking-wider text-black transition-all duration-300;
+    box-shadow: 0 10px 30px -14px rgba(255, 106, 0, 0.6);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-racing-orange-light);
+    transform: translateY(-1px);
+    box-shadow: 0 16px 40px -18px rgba(255, 106, 0, 0.7);
+  }
+
+  /* Ghost button */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-md border border-white/15 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-white/80 transition-all duration-300 hover:border-white/40 hover:bg-white/5 hover:text-white;
+  }
+
+  /* Paid media chip */
+  .chip {
+    @apply inline-flex items-center gap-2.5 rounded-md border border-white/12 bg-white/[0.04] px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-white/75 backdrop-blur;
+  }
+
+  /* Hide scrollbar (horizontal rails) */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Big outlined display text */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  }
+
+  /* Reveal on scroll */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.7s var(--ease-racing),
+      transform 0.7s var(--ease-racing);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .animate-marquee {
+      animation: none !important;
+    }
+  }
+
+  /* Service tile base */
+  .tile {
+    @apply relative overflow-hidden rounded-xl border border-white/10 bg-carbon-800 transition-colors duration-300;
+  }
+  .tile:hover {
+    @apply border-white/20;
+  }
+
+  /* Media hover zoom inside tiles */
+  .tile-media {
+    @apply absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out;
+  }
+  .tile:hover .tile-media {
+    transform: scale(1.05);
+  }
+
+  .section-glow {
+    background:
+      radial-gradient(
+        900px 520px at 92% -10%,
+        rgba(255, 106, 0, 0.055),
+        transparent 62%
+      ),
+      radial-gradient(
+        720px 500px at 0% 110%,
+        rgba(255, 106, 0, 0.035),
+        transparent 62%
+      ),
+      var(--color-carbon-950);
+  }
+}
+
+@media (hover: none) {
+  .tile:hover .tile-media {
+    transform: none;
+  }
+}

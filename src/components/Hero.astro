@@ -1,0 +1,73 @@
+---
+import Icon from "./ui/Icon.astro";
+import { heroStats, whatsapp } from "../data/site";
+---
+
+<section id="inicio" class="relative overflow-hidden bg-carbon-950">
+  <div class="absolute inset-0" aria-hidden="true">
+    <img
+      src="/images/hero-gt.jpg"
+      alt=""
+      class="absolute inset-0 h-full w-full object-cover object-[65%_center] opacity-50"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-carbon-950 via-carbon-950/70 to-carbon-950/25" />
+    <div class="absolute inset-0 bg-gradient-to-t from-carbon-950 via-transparent to-carbon-950/70" />
+    <div
+      class="absolute inset-0 bg-[radial-gradient(720px_520px_at_78%_38%,rgba(255,106,0,0.12),transparent_70%)]"
+      aria-hidden="true"
+    />
+  </div>
+
+  <div class="wrap relative flex min-h-[100svh] flex-col items-start justify-center pb-24 pt-24 md:pb-24">
+    <p class="eyebrow mb-7" data-reveal>
+      Estética vehicular
+    </p>
+
+    <h1
+      class="font-display font-black uppercase leading-[0.98] tracking-[-0.015em] text-white"
+      data-reveal
+    >
+      <span class="block text-[11vw] sm:text-6xl md:text-7xl">El detalle</span>
+      <span class="block text-[11vw] text-outline sm:text-6xl md:text-7xl">marca la</span>
+      <span class="block text-[11vw] text-racing-orange sm:text-6xl md:text-7xl">
+        diferencia
+      </span>
+    </h1>
+
+    <p class="mt-7 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg" data-reveal style="--reveal-delay:120ms">
+      En <strong class="font-bold text-white">VARANO DETAIL</strong> convertimos tu vehículo en una pieza impecable:
+      lavados premium, tratamientos de detalle y obsesión por la terminación. Todo a mano, sin atajos.
+    </p>
+
+    <div class="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center" data-reveal style="--reveal-delay:200ms">
+      <a
+        href={whatsapp.link + encodeURIComponent(whatsapp.text)}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-primary"
+      >
+        <Icon name="whatsapp" className="h-5 w-5" />
+        Consultar por WhatsApp
+      </a>
+      <a href="#servicios" class="btn-ghost">
+        Ver servicios
+        <Icon name="arrowUpRight" className="h-4 w-4" />
+      </a>
+    </div>
+
+    <p
+      class="mt-12 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/55 sm:text-xs"
+      data-reveal
+      style="--reveal-delay:280ms"
+    >
+      {heroStats.map((s, i) => (
+        <span class={i > 0 ? "ml-3 sm:ml-4" : ""}>
+          {i > 0 && <span class="mr-3 text-racing-orange sm:mr-4">·</span>}
+          {s.value} {s.label}
+        </span>
+      ))}
+    </p>
+  </div>
+</section>

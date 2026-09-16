@@ -1,0 +1,18 @@
+---
+const items = ["Detailing", "Cuidado", "Rendimiento", "Estética", "Precisión", "Obsesión"];
+---
+
+<div class="relative overflow-hidden border-y border-white/10 bg-carbon-900 py-5">
+  <div class="flex w-max animate-marquee items-center gap-12 whitespace-nowrap">
+    {[0, 1].map((dup) => (
+      <div class="flex items-center gap-12" aria-hidden={dup === 1}>
+        {items.map((t) => (
+          <span class="flex items-center gap-12 font-display text-base font-semibold uppercase tracking-[0.3em] text-white/30 transition-colors duration-300 hover:text-racing-orange sm:text-lg">
+            {t}
+            <span class="inline-block h-1.5 w-1.5 rotate-45 bg-racing-orange/80" />
+          </span>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>

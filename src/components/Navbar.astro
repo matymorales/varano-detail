@@ -1,0 +1,91 @@
+---
+import BrandLogo from "./ui/BrandLogo.astro";
+import Icon from "./ui/Icon.astro";
+import { navLinks, whatsapp } from "../data/site";
+---
+
+<header
+  data-navbar
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-300 [&.is-scrolled]:bg-carbon-950/90 [&.is-scrolled]:backdrop-blur-xl [&.is-scrolled]:border-b [&.is-scrolled]:border-white/10"
+>
+  <div class="h-px w-full bg-gradient-to-r from-transparent via-racing-orange/70 to-transparent" />
+  <nav class="wrap flex h-[68px] items-center justify-between gap-6">
+    <BrandLogo />
+
+    <ul class="hidden items-center gap-8 lg:flex">
+      {navLinks.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            class="group relative text-[13px] font-semibold uppercase tracking-[0.18em] text-white/65 transition-colors duration-300 hover:text-white"
+          >
+            {l.label}
+            <span class="absolute -bottom-2 left-0 h-px w-0 bg-racing-orange transition-all duration-300 group-hover:w-full" />
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <a
+        href={whatsapp.link + encodeURIComponent(whatsapp.text)}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden items-center gap-2 rounded-md border border-racing-orange/50 px-4 py-2 text-xs font-bold uppercase tracking-wider text-racing-orange transition-colors duration-300 hover:bg-racing-orange hover:text-black sm:inline-flex"
+      >
+        <Icon name="whatsapp" className="h-4 w-4" />
+        WhatsApp
+      </a>
+
+      <button
+        data-menu-toggle
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-md border border-white/20 text-white transition-colors hover:border-white/45 lg:hidden"
+      >
+        <Icon name="menu" className="h-5 w-5" />
+      </button>
+    </div>
+  </nav>
+</header>
+
+<div
+  data-menu
+  aria-hidden="true"
+  class="fixed inset-0 z-[60] flex flex-col bg-carbon-950 opacity-0 pointer-events-none backdrop-blur-xl transition-opacity duration-300 [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto lg:hidden"
+>
+  <div class="flex h-[71px] items-center justify-between px-5 sm:px-8">
+    <BrandLogo compact />
+    <button
+      data-menu-close
+      aria-label="Cerrar menú"
+      class="inline-flex h-11 w-11 items-center justify-center rounded-md border border-white/20 text-white hover:border-white/45"
+    >
+      <Icon name="close" className="h-5 w-5" />
+    </button>
+  </div>
+
+  <div class="flex flex-1 flex-col items-stretch justify-center gap-1 px-5 sm:px-8">
+    {navLinks.map((l, idx) => (
+      <a
+        href={l.href}
+        class="border-b border-white/8 py-4 font-display text-3xl font-black uppercase tracking-tight text-white/90 -translate-y-2 opacity-0 transition-all duration-500 ease-out hover:text-racing-orange [&.is-in]:translate-y-0 [&.is-in]:opacity-100"
+      >
+        <span class="mr-4 align-top text-xs font-bold text-racing-orange">0{idx + 1}</span>
+        {l.label}
+      </a>
+    ))}
+  </div>
+
+  <div class="px-5 pb-10 sm:px-8">
+    <a
+      href={whatsapp.link + encodeURIComponent(whatsapp.text)}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex w-full items-center justify-center gap-3 rounded-md bg-racing-orange py-4 text-sm font-extrabold uppercase tracking-widest text-black"
+    >
+      <Icon name="whatsapp" className="h-5 w-5" />
+      Consultar por WhatsApp
+    </a>
+  </div>
+</div>

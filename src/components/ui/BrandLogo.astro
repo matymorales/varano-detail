@@ -1,0 +1,31 @@
+---
+import { findLogo } from "../../utils/logo";
+
+interface Props {
+  compact?: boolean;
+  className?: string;
+}
+
+const { compact = false, className = "" } = Astro.props;
+const logoUrl = findLogo();
+---
+
+{
+  logoUrl ? (
+    <a href="#inicio" class={`group inline-flex items-center gap-3 ${className}`} aria-label="VARANO DETAIL — Inicio">
+      <img
+        src={logoUrl}
+        alt="Logo VARANO DETAIL"
+        class={compact ? "h-9 w-auto" : "h-12 w-auto"}
+        loading="lazy"
+        decoding="async"
+      />
+    </a>
+  ) : (
+    <a href="#inicio" class={`group inline-flex leading-none ${className}`} aria-label="VARANO DETAIL — Inicio">
+      <span class="font-display text-2xl tracking-wide text-white uppercase">
+        VARANO<span class="text-racing-orange">.</span>
+      </span>
+    </a>
+  )
+}

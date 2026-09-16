@@ -1,6 +1,7 @@
 import { readdirSync } from "node:fs";
+import { join } from "node:path";
 
-const PUBLIC_DIR = new URL("../../public/", import.meta.url);
+const PUBLIC_DIR = join(process.cwd(), "public");
 
 const IMAGE_EXT = /\.(png|svg|webp|jpg|jpeg|avif)$/i;
 

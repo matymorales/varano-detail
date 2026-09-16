@@ -18,6 +18,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@astrojs/cloudflare": "^14.3.2",
     "@types/node": "^22.20.3"
   }
 }

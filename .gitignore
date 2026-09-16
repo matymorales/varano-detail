@@ -22,3 +22,9 @@ pnpm-debug.log*
 # os
 .DS_Store
 Thumbs.db
+
+# wrangler
+.wrangler/
+wrangler.toml
+wrangler.json
+

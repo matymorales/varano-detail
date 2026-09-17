@@ -100,69 +100,20 @@ if (ba) {
   ba.tabIndex = 0;
 }
 
-/* ---------- Gallery rail ---------- */
-const rail = document.querySelector<HTMLElement>("[data-gallery]");
-if (rail) {
-  const filters = document.querySelectorAll<HTMLButtonElement>("[data-gallery-filter]");
-  const cards = Array.from(rail.querySelectorAll<HTMLElement>("[data-category]"));
-  const progress = document.querySelector<HTMLElement>("[data-gallery-progress]");
-
-  const setProgress = () => {
-    if (!progress) return;
-    const max = rail.scrollWidth - rail.clientWidth;
-    const p = max > 0 ? Math.min(1, Math.max(0, rail.scrollLeft / max)) : 0;
-    progress.style.transform = `scaleX(${p})`;
-  };
-  setProgress();
-  rail.addEventListener("scroll", setProgress, { passive: true });
-  window.addEventListener("resize", setProgress);
+/* ---------- Gallery grid ---------- */
+const galleryGrid = document.querySelector<HTMLElement>("[data-gallery-filters]")?.parentElement;
+const gridSection = galleryGrid?.closest("section");
+if (gridSection) {
+  const filters = gridSection.querySelectorAll<HTMLButtonElement>("[data-gallery-filter]");
+  const cards = Array.from(gridSection.querySelectorAll<HTMLElement>("[data-category]"));
 
   filters.forEach((btn) => {
     btn.addEventListener("click", () => {
       const cat = btn.dataset.galleryFilter ?? "all";
       filters.forEach((b) => b.classList.toggle("is-active", b === btn));
       cards.forEach((card) => {
-        card.classList.toggle(
-          "hidden",
-          cat !== "all" && card.dataset.category !== cat
-        );
+        card.style.display = cat !== "all" && card.dataset.category !== cat ? "none" : "";
       });
-      rail.scrollTo({ left: 0, behavior: "smooth" });
-      requestAnimationFrame(setProgress);
     });
   });
-
-  const step = () => {
-    const first = rail.querySelector<HTMLElement>("[data-category]:not(.hidden)");
-    return (first ? first.getBoundingClientRect().width : 400) + 20;
-  };
-  document
-    .querySelector("[data-gallery-next]")
-    ?.addEventListener("click", () => rail.scrollBy({ left: step(), behavior: "smooth" }));
-  document
-    .querySelector("[data-gallery-prev]")
-    ?.addEventListener("click", () => rail.scrollBy({ left: -step(), behavior: "smooth" }));
-
-  let drag = false;
-  let startX = 0;
-  let startLeft = 0;
-  rail.addEventListener("pointerdown", (e) => {
-    if (e.pointerType !== "mouse") return;
-    drag = true;
-    startX = e.clientX;
-    startLeft = rail.scrollLeft;
-    rail.style.scrollSnapType = "none";
-  });
-  window.addEventListener("pointermove", (e) => {
-    if (!drag) return;
-    rail.scrollLeft = startLeft - (e.clientX - startX);
-  });
-  const endDrag = () => {
-    if (!drag) return;
-    drag = false;
-    rail.style.scrollSnapType = "";
-    setProgress();
-  };
-  window.addEventListener("pointerup", endDrag);
-  window.addEventListener("pointercancel", endDrag);
 }

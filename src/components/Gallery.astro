@@ -1,25 +1,24 @@
 ---
 import Icon from "./ui/Icon.astro";
-import { gallery, galleryCategories, contact } from "../data/site";
+import { gallery, galleryCategories } from "../data/site";
 ---
 
-  <section class="relative overflow-hidden bg-carbon-900 py-24 sm:py-32">
-    <div id="trabajos" class="wrap relative">
-    <div class="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between" data-reveal>
+<section class="relative overflow-hidden bg-carbon-900 py-24 sm:py-32">
+  <div id="trabajos" class="wrap relative">
+    <div class="mb-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between" data-reveal>
       <div>
-        <p class="eyebrow mb-5">Galería</p>
+        <p class="eyebrow mb-5">Trabajos recientes</p>
         <h2 class="font-display font-black uppercase leading-[0.98] tracking-[-0.015em] text-white">
-          <span class="block text-4xl sm:text-5xl md:text-6xl">Trabajos</span>
-          <span class="block text-outline text-4xl sm:text-5xl md:text-6xl">realizados</span>
+          <span class="block text-4xl sm:text-5xl md:text-6xl">Galería</span>
         </h2>
       </div>
       <p class="max-w-sm text-sm leading-relaxed text-white/55">
-        Cada vehículo que pasa por el detail sale distinto. Así terminan los trabajos en
+        Autos reales, resultados reales. Cada vehículo que pasa por el detail sale distinto en
         <strong class="text-white"> VARANO DETAIL</strong>.
       </p>
     </div>
 
-    <div class="mb-9 flex flex-wrap items-center gap-2" data-gallery-filters data-reveal style="--reveal-delay:100ms">
+    <div class="mb-8 flex flex-wrap items-center gap-2" data-gallery-filters data-reveal style="--reveal-delay:100ms">
       {galleryCategories.map((c) => (
         <button
           type="button"
@@ -32,75 +31,34 @@ import { gallery, galleryCategories, contact } from "../data/site";
     </div>
   </div>
 
-  <div data-reveal style="--reveal-delay:160ms">
-    <div class="wrap relative">
-      <div class="pointer-events-none absolute inset-y-0 left-5 z-10 w-10 bg-gradient-to-r from-carbon-900 to-transparent sm:left-8" aria-hidden="true" />
-      <div class="pointer-events-none absolute inset-y-0 right-5 z-10 w-10 bg-gradient-to-l from-carbon-900 to-transparent sm:right-8" aria-hidden="true" />
-
-      <div
-        data-gallery
-        class="no-scrollbar flex cursor-grab snap-x snap-mandatory gap-5 overflow-x-auto pb-1 active:cursor-grabbing"
-      >
-        {gallery.map((g, i) => (
-          <figure
-            data-category={g.category}
-            class="group relative aspect-[4/3] w-[85vw] shrink-0 snap-start overflow-hidden rounded-xl border border-white/10 sm:w-[440px] lg:w-[560px]"
-          >
+  <div class="wrap" data-reveal style="--reveal-delay:160ms">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {gallery.map((g, i) => (
+        <figure
+          data-category={g.category}
+          class="group relative overflow-hidden rounded-xl border border-white/10 bg-carbon-800 transition-colors duration-300 hover:border-white/20"
+        >
+          <div class="relative aspect-[4/3] overflow-hidden">
             <img
               src={g.src}
               alt={g.caption}
               class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              loading={i < 2 ? "eager" : "lazy"}
+              loading={i < 3 ? "eager" : "lazy"}
               decoding="async"
               draggable="false"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-carbon-950/85 via-carbon-950/10 to-transparent" />
-            <figcaption class="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-5 sm:p-6">
-              <span class="text-[10px] font-bold uppercase tracking-[0.28em] text-racing-orange">
-                {galleryCategories.find((c) => c.key === g.category)?.label}
-              </span>
-              <span class="font-display text-lg font-extrabold uppercase tracking-tight text-white sm:text-xl">
-                {g.caption}
-              </span>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </div>
-
-    <div class="wrap mt-8 flex items-center gap-6">
-      <div class="flex items-center gap-2">
-        <button
-          type="button"
-          data-gallery-prev
-          aria-label="Trabajo anterior"
-          class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white/80 transition-colors hover:border-racing-orange hover:text-racing-orange"
-        >
-          <Icon name="arrowLeft" className="h-4 w-4" />
-        </button>
-        <button
-          type="button"
-          data-gallery-next
-          aria-label="Trabajo siguiente"
-          class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white/80 transition-colors hover:border-racing-orange hover:text-racing-orange"
-        >
-          <Icon name="arrowRight" className="h-4 w-4" />
-        </button>
-      </div>
-
-      <div class="relative h-px flex-1 bg-white/10">
-        <div data-gallery-progress class="absolute inset-y-0 left-0 w-full origin-left scale-x-0 bg-racing-orange" />
-      </div>
-
-      <a
-        href={contact.instagram.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hidden items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-white/55 transition-colors hover:text-racing-orange sm:inline-flex"
-      >
-        Ver más en Instagram
-        <Icon name="arrowUpRight" className="h-4 w-4" />
-      </a>
+            <div class="absolute inset-0 bg-gradient-to-t from-carbon-950/90 via-carbon-950/20 to-transparent" />
+          </div>
+          <figcaption class="flex flex-col gap-1 p-4 sm:p-5">
+            <span class="font-display text-lg font-extrabold uppercase tracking-tight text-white">
+              {g.car}
+            </span>
+            <span class="text-xs font-bold uppercase tracking-[0.22em] text-racing-orange">
+              {g.service}
+            </span>
+          </figcaption>
+        </figure>
+      ))}
     </div>
   </div>
 </section>

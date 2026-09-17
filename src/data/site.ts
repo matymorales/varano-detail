@@ -18,6 +18,8 @@ export interface GalleryItem {
   src: string;
   caption: string;
   category: GalleryCategory;
+  car: string;
+  service: string;
   tall?: boolean;
 }
 
@@ -106,13 +108,13 @@ export const galleryCategories: { key: GalleryCategory | "all"; label: string }[
 ];
 
 export const gallery: GalleryItem[] = [
-  { src: "/images/shop-detail.png", caption: "Lavado premium", category: "lavado" },
-  { src: "/images/wheels.png", caption: "Detalle de llantas", category: "lavado" },
-  { src: "/images/headlight.png", caption: "Ópticas restauradas", category: "opticas" },
-  { src: "/images/interior.png", caption: "Interior full", category: "interior" },
-  { src: "/images/detail-polish.png", caption: "Abrillantado", category: "abrillantado" },
-  { src: "/images/detail-hand.png", caption: "Tapizado de cuero", category: "interior" },
-  { src: "/images/engine.png", caption: "Motor limpio", category: "motor" },
+  { src: "/images/shop-detail.png", caption: "Lavado premium", category: "lavado", car: "BMW", service: "Lavado + tratamiento exterior" },
+  { src: "/images/wheels.png", caption: "Detalle de llantas", category: "lavado", car: "Volkswagen Golf", service: "Detalle de llantas" },
+  { src: "/images/headlight.png", caption: "Ópticas restauradas", category: "opticas", car: "Toyota", service: "Restauración de ópticas" },
+  { src: "/images/interior.png", caption: "Interior full", category: "interior", car: "Ford", service: "Interior full" },
+  { src: "/images/detail-polish.png", caption: "Abrillantado", category: "abrillantado", car: "Audi", service: "Abrillantado + sellado" },
+  { src: "/images/detail-hand.png", caption: "Tapizado de cuero", category: "interior", car: "Fiat", service: "Tapizado de cuero" },
+  { src: "/images/engine.png", caption: "Motor limpio", category: "motor", car: "BMW", service: "Limpieza de motor" },
 ];
 
 

@@ -27,6 +27,14 @@ import { navLinks, whatsapp } from "../data/site";
     </ul>
 
     <div class="flex items-center gap-3">
+      <button
+        data-search-toggle
+        aria-label="Buscar"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/20 text-white/70 transition-colors hover:border-white/45 hover:text-white"
+      >
+        <Icon name="search" className="h-4 w-4" />
+      </button>
+
       <a
         href={whatsapp.link + encodeURIComponent(whatsapp.text)}
         target="_blank"
@@ -49,10 +57,42 @@ import { navLinks, whatsapp } from "../data/site";
   </nav>
 </header>
 
+<!-- Search overlay -->
+<div
+  data-search-overlay
+  class="fixed inset-0 z-[60] hidden bg-carbon-950/95 backdrop-blur-xl"
+>
+  <div class="wrap flex h-[68px] items-center justify-between gap-4">
+    <div class="flex items-center gap-3 flex-1">
+      <Icon name="search" className="h-5 w-5 text-white/50 shrink-0" />
+      <input
+        data-search-input
+        type="text"
+        placeholder="Buscar servicios, trabajos, promos..."
+        class="w-full bg-transparent text-sm text-white placeholder-white/40 outline-none"
+        autofocus
+      />
+    </div>
+    <button
+      data-search-close
+      aria-label="Cerrar búsqueda"
+      class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/20 text-white/70 hover:border-white/45 hover:text-white"
+    >
+      <Icon name="close" className="h-5 w-5" />
+    </button>
+  </div>
+
+  <div class="wrap mt-2">
+    <div data-search-results class="flex flex-col gap-1"></div>
+    <p data-search-empty class="hidden text-center text-sm text-white/40 py-8">No se encontraron resultados</p>
+  </div>
+</div>
+
+<!-- Mobile menu (unchanged) -->
 <div
   data-menu
   aria-hidden="true"
-  class="fixed inset-0 z-[60] flex flex-col bg-carbon-950 opacity-0 pointer-events-none backdrop-blur-xl transition-opacity duration-300 [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto lg:hidden"
+  class="fixed inset-0 z-[70] flex flex-col bg-carbon-950 opacity-0 pointer-events-none backdrop-blur-xl transition-opacity duration-300 [&.is-open]:opacity-100 [&.is-open]:pointer-events-auto lg:hidden"
 >
   <div class="flex h-[71px] items-center justify-between px-5 sm:px-8">
     <BrandLogo compact />

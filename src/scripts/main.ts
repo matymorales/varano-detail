@@ -166,3 +166,96 @@ if (rail) {
   window.addEventListener("pointerup", endDrag);
   window.addEventListener("pointercancel", endDrag);
 }
+
+/* ---------- Global search ---------- */
+const searchToggle = document.querySelector<HTMLButtonElement>("[data-search-toggle]");
+const searchOverlay = document.querySelector<HTMLElement>("[data-search-overlay]");
+const searchInput = document.querySelector<HTMLInputElement>("[data-search-input]");
+const searchClose = document.querySelector<HTMLButtonElement>("[data-search-close]");
+const searchResults = document.querySelector<HTMLElement>("[data-search-results]");
+const searchEmpty = document.querySelector<HTMLElement>("[data-search-empty]");
+
+interface SearchResult {
+  title: string;
+  desc: string;
+  section: string;
+  href: string;
+}
+
+const searchData: SearchResult[] = [
+  { title: "Lavados premium", desc: "Lavado completo, técnica profesional", section: "Servicios", href: "#servicios" },
+  { title: "Abrillantados y tratamientos", desc: "Pulido, sellado y revestimientos", section: "Servicios", href: "#servicios" },
+  { title: "Interior full", desc: "Limpieza profunda de tapizados", section: "Servicios", href: "#servicios" },
+  { title: "Tapizados", desc: "Restauración y limpieza de tapizados", section: "Servicios", href: "#servicios" },
+  { title: "Limpieza de motor", desc: "Desengrase y protección del motor", section: "Servicios", href: "#servicios" },
+  { title: "Restauración de ópticas", desc: "Recuperación total de faros", section: "Servicios", href: "#servicios" },
+  { title: "2x1 en Lavados Premium", desc: "Segundo lavado gratis. Válido hasta 30/09", section: "Promos", href: "#contacto" },
+  { title: "Zona sur · GBA", desc: "Lun a Sáb · 9:00 a 19:00 hs", section: "Contacto", href: "#contacto" },
+  { title: "Instagram @varanodetail", desc: "Seguinos para ver trabajos", section: "Contacto", href: "#contacto" },
+];
+
+const openSearch = () => {
+  if (!searchOverlay) return;
+  searchOverlay.classList.remove("hidden");
+  document.documentElement.style.overflow = "hidden";
+  setTimeout(() => searchInput?.focus(), 100);
+};
+
+const closeSearch = () => {
+  if (!searchOverlay) return;
+  searchOverlay.classList.add("hidden");
+  document.documentElement.style.overflow = "";
+  if (searchInput) searchInput.value = "";
+  if (searchResults) searchResults.innerHTML = "";
+  if (searchEmpty) searchEmpty.classList.add("hidden");
+};
+
+const renderResults = (query: string) => {
+  if (!searchResults || !searchEmpty) return;
+  const q = query.toLowerCase().trim();
+  if (!q) {
+    searchResults.innerHTML = "";
+    searchEmpty.classList.add("hidden");
+    return;
+  }
+
+  const matches = searchData.filter(
+    (d) => d.title.toLowerCase().includes(q) || d.desc.toLowerCase().includes(q) || d.section.toLowerCase().includes(q)
+  );
+
+  if (matches.length === 0) {
+    searchResults.innerHTML = "";
+    searchEmpty.classList.remove("hidden");
+    return;
+  }
+
+  searchEmpty.classList.add("hidden");
+  searchResults.innerHTML = matches
+    .map(
+      (m) => `
+      <a href="${m.href}" class="flex items-center justify-between rounded-lg border border-white/8 bg-white/[0.03] px-4 py-3 transition-colors hover:border-racing-orange/40 hover:bg-white/[0.06]" data-search-result>
+        <div>
+          <p class="text-sm font-semibold text-white">${m.title}</p>
+          <p class="text-xs text-white/50">${m.desc}</p>
+        </div>
+        <span class="text-[10px] font-bold uppercase tracking-wider text-racing-orange/70">${m.section}</span>
+      </a>`
+    )
+    .join("");
+};
+
+searchToggle?.addEventListener("click", openSearch);
+searchClose?.addEventListener("click", closeSearch);
+searchInput?.addEventListener("input", () => renderResults(searchInput.value));
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeSearch();
+  if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+    e.preventDefault();
+    openSearch();
+  }
+});
+
+searchResults?.addEventListener("click", (e) => {
+  if ((e.target as HTMLElement).closest("[data-search-result]")) closeSearch();
+});

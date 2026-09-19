@@ -259,3 +259,58 @@ document.addEventListener("keydown", (e) => {
 searchResults?.addEventListener("click", (e) => {
   if ((e.target as HTMLElement).closest("[data-search-result]")) closeSearch();
 });
+
+/* ---------- Benefits modal ---------- */
+const modal = document.createElement("div");
+modal.className = "fixed inset-0 z-[80] hidden items-center justify-center bg-carbon-950/90 backdrop-blur-sm p-5";
+modal.setAttribute("role", "dialog");
+modal.setAttribute("aria-modal", "true");
+modal.innerHTML = `
+  <div class="relative w-full max-w-md rounded-2xl border border-white/10 bg-carbon-800 p-6 sm:p-8">
+    <button data-modal-close aria-label="Cerrar" class="absolute top-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:border-white/45 hover:text-white">
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h3 data-modal-title class="font-display text-xl font-extrabold uppercase tracking-tight text-white sm:text-2xl"></h3>
+    <p class="mt-1 text-xs font-bold uppercase tracking-[0.22em] text-racing-orange">Beneficios del servicio</p>
+    <ul data-modal-benefits class="mt-5 flex flex-col gap-3"></ul>
+  </div>
+`;
+document.body.appendChild(modal);
+
+const modalTitle = modal.querySelector<HTMLElement>("[data-modal-title]");
+const modalBenefits = modal.querySelector<HTMLElement>("[data-modal-benefits]");
+const modalClose = modal.querySelector<HTMLButtonElement>("[data-modal-close]");
+
+const openModal = (name: string, benefits: string[]) => {
+  if (!modalTitle || !modalBenefits) return;
+  modalTitle.textContent = name;
+  modalBenefits.innerHTML = benefits
+    .map((b) => `<li class="flex items-start gap-3 text-sm text-white/70"><svg viewBox="0 0 24 24" class="mt-0.5 h-4 w-4 shrink-0 text-racing-orange" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>${b}</li>`)
+    .join("");
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  document.documentElement.style.overflow = "hidden";
+};
+
+const closeModal = () => {
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+  document.documentElement.style.overflow = "";
+};
+
+document.querySelectorAll<HTMLButtonElement>("[data-gallery-info]").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const name = btn.dataset.serviceName ?? "";
+    const benefits = JSON.parse(btn.dataset.benefits ?? "[]");
+    openModal(name, benefits);
+  });
+});
+
+modalClose?.addEventListener("click", closeModal);
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) closeModal();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+});

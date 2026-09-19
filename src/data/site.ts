@@ -20,6 +20,7 @@ export interface GalleryItem {
   category: GalleryCategory;
   car: string;
   service: string;
+  benefits: string[];
   tall?: boolean;
 }
 
@@ -108,12 +109,12 @@ export const galleryCategories: { key: GalleryCategory | "all"; label: string }[
 ];
 
 export const gallery: GalleryItem[] = [
-  { src: "/images/shop-detail.png", caption: "Lavado premium", category: "lavado", car: "Citroen", service: "Lavado + tratamiento exterior" },
-  { src: "/images/wheels.png", caption: "Detalle de llantas", category: "lavado", car: "Volkswagen Golf", service: "Detalle de llantas" },
-  { src: "/images/headlight.png", caption: "Ópticas restauradas", category: "opticas", car: "Fiat", service: "Restauración de ópticas" },
-  { src: "/images/interior.png", caption: "Interior full", category: "interior", car: "Volkswagen Gol", service: "Interior full" },
-  { src: "/images/detail-polish.png", caption: "Abrillantado", category: "abrillantado", car: "Volkswagen Bora", service: "Abrillantado + sellado" },
-  { src: "/images/engine.png", caption: "Motor limpio", category: "motor", car: "Renault", service: "Limpieza de motor" },
+  { src: "/images/shop-detail.png", caption: "Lavado premium", category: "lavado", car: "Citroen", service: "Lavado + tratamiento exterior", benefits: ["Protección de pintura", "Productos de alta gama", "Secado sin rayones", "Terminación impecable"] },
+  { src: "/images/wheels.png", caption: "Detalle de llantas", category: "lavado", car: "Volkswagen Golf", service: "Detalle de llantas", benefits: ["Eliminación de sarro", "Protector UV", "Brillo duradero"] },
+  { src: "/images/headlight.png", caption: "Ópticas restauradas", category: "opticas", car: "Fiat", service: "Restauración de ópticas", benefits: ["Mayor visibilidad", "Protección UV", "Aspecto como nuevo"] },
+  { src: "/images/interior.png", caption: "Interior full", category: "interior", car: "Volkswagen Gol", service: "Interior full", benefits: ["Higiene profunda", "Eliminación de olores", "Protección de materiales"] },
+  { src: "/images/detail-polish.png", caption: "Abrillantado", category: "abrillantado", car: "Volkswagen Bora", service: "Abrillantado + sellado", benefits: ["Eliminación de micro-rayones", "Brillo espejo", "Protección prolongada"] },
+  { src: "/images/engine.png", caption: "Motor limpio", category: "motor", car: "Renault", service: "Limpieza de motor", benefits: ["Detección de fugas", "Mejor rendimiento", "Estética renovada"] },
 ];
 
 

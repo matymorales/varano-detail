@@ -54,6 +54,22 @@ import { gallery, galleryCategories, contact } from "../data/site";
               draggable="false"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-carbon-950/85 via-carbon-950/10 to-transparent" />
+
+            <button
+              type="button"
+              data-gallery-info
+              data-benefits={JSON.stringify(g.benefits)}
+              data-service-name={g.service}
+              aria-label={`Beneficios de ${g.service}`}
+              class="absolute top-4 right-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-carbon-950/60 text-white/70 backdrop-blur-sm transition-all duration-300 hover:border-racing-orange hover:text-racing-orange"
+            >
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+            </button>
+
             <figcaption class="absolute inset-x-0 bottom-0 flex flex-col gap-1 p-5 sm:p-6">
               <span class="font-display text-lg font-extrabold uppercase tracking-tight text-white sm:text-xl">
                 {g.car}

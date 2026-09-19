@@ -3,6 +3,7 @@ export interface Service {
   title: string;
   desc: string;
   image: string;
+  price?: string;
   featured?: boolean;
   className: string;
 }
@@ -47,6 +48,7 @@ export const services: Service[] = [
     title: "Lavados premium",
     desc: "Lavado completo, técnica profesional y productos de alta gama con terminación impecable.",
     image: "/images/shop-detail.png",
+    price: "$15.000",
     featured: true,
     className: "md:col-span-2 md:row-span-2 min-h-[420px]",
   },
@@ -55,6 +57,7 @@ export const services: Service[] = [
     title: "Abrillantados y tratamientos",
     desc: "Pulido, sellado y revestimientos que protegen y devuelven el brillo de fábrica.",
     image: "/images/detail-polish.png",
+    price: "$45.000",
     className: "md:col-span-2 md:row-span-1",
   },
   {
@@ -62,6 +65,7 @@ export const services: Service[] = [
     title: "Interior full",
     desc: "Limpieza profunda de tapizados, tablero y detalles para un habitáculo impecable.",
     image: "/images/interior.png",
+    price: "$35.000",
     className: "md:col-span-1",
   },
   {
@@ -69,6 +73,7 @@ export const services: Service[] = [
     title: "Tapizados",
     desc: "Restauración y limpieza de tapizados con extracción profesional.",
     image: "/images/detail-hand.png",
+    price: "$25.000",
     className: "md:col-span-1",
   },
   {
@@ -76,6 +81,7 @@ export const services: Service[] = [
     title: "Limpieza de motor",
     desc: "Desengrase y protección del motor para un rendimiento y estética superior.",
     image: "/images/engine.png",
+    price: "$20.000",
     className: "md:col-span-2",
   },
   {
@@ -83,6 +89,7 @@ export const services: Service[] = [
     title: "Restauración de ópticas",
     desc: "Recuperación total de faros y ópticas: lucidez, protección y estética renovada.",
     image: "/images/headlight.png",
+    price: "$30.000",
     className: "md:col-span-1",
   },
 ];

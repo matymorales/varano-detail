@@ -1,0 +1,64 @@
+---
+import { promotions, whatsapp } from "../data/site";
+
+const activePromos = promotions.filter((p) => p.active);
+if (activePromos.length === 0) return null;
+
+const mainPromo = activePromos[0];
+const morePromos = activePromos.slice(1);
+---
+
+<section class="relative overflow-hidden bg-carbon-950 py-20 sm:py-28">
+  <div class="absolute inset-0 bg-[radial-gradient(800px_500px_at_50%_50%,rgba(255,106,0,0.08),transparent_65%)]" aria-hidden="true" />
+
+  <div class="wrap relative">
+    <div class="flex flex-col items-center gap-8 text-center" data-reveal>
+      <div>
+        <p class="eyebrow mb-5 justify-center">Promociones</p>
+        <h2 class="font-display font-black uppercase leading-[0.98] tracking-[-0.015em] text-white">
+          <span class="block text-5xl sm:text-6xl md:text-7xl text-racing-orange">{mainPromo.discount}</span>
+        </h2>
+      </div>
+
+      <div class="max-w-xl">
+        <h3 class="font-display text-2xl font-extrabold uppercase tracking-tight text-white sm:text-3xl">
+          {mainPromo.title}
+        </h3>
+        <p class="mt-4 text-base leading-relaxed text-white/60">
+          {mainPromo.description}
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <div class="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white/70">
+          <span class="text-racing-orange">Válido hasta:</span> {mainPromo.validUntil}
+        </div>
+        {mainPromo.code && (
+          <div class="inline-flex items-center gap-2 rounded-md border border-racing-orange/30 bg-racing-orange/10 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-racing-orange">
+            Código: {mainPromo.code}
+          </div>
+        )}
+      </div>
+
+      <a
+        href={whatsapp.link + encodeURIComponent(`Hola VARANO DETAIL! Quiero aprovechar la promo: ${mainPromo.title}`)}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-primary mt-2"
+      >
+        Quiero esta promo
+      </a>
+    </div>
+
+    {morePromos.length > 0 && (
+      <div class="mt-12 flex flex-wrap items-center justify-center gap-3" data-reveal style="--reveal-delay:100ms">
+        {morePromos.map((p) => (
+          <div class="inline-flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.03] px-5 py-3">
+            <span class="font-display text-lg font-extrabold text-racing-orange">{p.discount}</span>
+            <span class="text-sm text-white/60">{p.title}</span>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

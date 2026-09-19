@@ -189,7 +189,7 @@ const searchData: SearchResult[] = [
   { title: "Tapizados", desc: "Restauración y limpieza de tapizados", section: "Servicios", href: "#servicios" },
   { title: "Limpieza de motor", desc: "Desengrase y protección del motor", section: "Servicios", href: "#servicios" },
   { title: "Restauración de ópticas", desc: "Recuperación total de faros", section: "Servicios", href: "#servicios" },
-  { title: "2x1 en Lavados Premium", desc: "Segundo lavado gratis. Válido hasta 30/09", section: "Promos", href: "#contacto" },
+  { title: "2x1 en Lavados Premium", desc: "Segundo lavado gratis. Válido hasta 30/09", section: "Promos", href: "#promos" },
   { title: "Zona sur · GBA", desc: "Lun a Sáb · 9:00 a 19:00 hs", section: "Contacto", href: "#contacto" },
   { title: "Instagram @varanodetail", desc: "Seguinos para ver trabajos", section: "Contacto", href: "#contacto" },
 ];
@@ -270,7 +270,7 @@ modal.innerHTML = `
     <button data-modal-close aria-label="Cerrar" class="absolute top-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:border-white/45 hover:text-white">
       <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <h3 data-modal-title class="font-display text-xl font-extrabold uppercase tracking-tight text-white sm:text-2xl"></h3>
+    <h3 data-modal-title class="font-display text-xl font-extrabold uppercase tracking-tight text-white pr-12 sm:text-2xl"></h3>
     <p class="mt-1 text-xs font-bold uppercase tracking-[0.22em] text-racing-orange">Beneficios del servicio</p>
     <ul data-modal-benefits class="mt-5 flex flex-col gap-3"></ul>
   </div>

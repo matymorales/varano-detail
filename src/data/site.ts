@@ -133,6 +133,26 @@ export const paymentMethods = [
   { name: "Mercado Pago", icon: "mp" as const },
 ];
 
+export interface Promotion {
+  title: string;
+  description: string;
+  discount: string;
+  validUntil: string;
+  code?: string;
+  active: boolean;
+}
+
+export const promotions: Promotion[] = [
+  {
+    title: "2x1 en Lavados Premium",
+    description: "Traé tu auto y el segundo lavado premium es gratis. Válido de lunes a jueves.",
+    discount: "2x1",
+    validUntil: "30/09/2026",
+    code: "VARANO2X1",
+    active: true,
+  },
+];
+
 export const heroStats = [
   { value: "+500", label: "Autos detallados" },
   { value: "4.9", label: "Valoración media" },
